@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const propTypes = {
   ...SectionProps.types
