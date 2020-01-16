@@ -55,7 +55,15 @@ class LoginForm extends React.Component {
     const sectionHeader = {
       title: 'Welcome back. We exist to make entrepreneurship easier.',
     };
-    const login = () => {
+    const phoneChange = (e) => {
+      this.setState({phone: e.target.value});
+    };
+    const passwordChange = (e) => {
+      this.setState({password: e.target.value});
+    };
+    const handleSubmit = e => {
+      e.preventDefault();
+
       axios.post(`http://47.110.10.120:3000/users/sign_in`, {
         login: this.state.phone,
         password: this.state.password,
@@ -87,13 +95,14 @@ class LoginForm extends React.Component {
             <div className="tiles-wrap">
               <div className="tiles-item">
                 <div className="tiles-item-inner">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <fieldset>
                       <div className="mb-12">
                         <Input
                           type="tel"
                           label="手机号"
                           placeholder="手机号"
+                          onChange={phoneChange}
                           labelHidden
                           required />
                       </div>
@@ -102,6 +111,7 @@ class LoginForm extends React.Component {
                           type="password"
                           label="密码"
                           placeholder="密码"
+                          onChange={passwordChange}
                           labelHidden
                           required />
                       </div>

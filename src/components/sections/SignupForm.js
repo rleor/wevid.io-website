@@ -18,6 +18,12 @@ const defaultProps = {
 
 class SignupForm extends React.Component {
 
+  state = {
+    phone: undefined,
+    verify_text: '获取验证码',
+    count_down: 60,
+    code: undefined,
+  };
   render() {
 
     const {
@@ -50,6 +56,60 @@ class SignupForm extends React.Component {
       title: 'Welcome. We exist to make entrepreneurship easier.',
     };
 
+    const phoneChange = (e) => {
+      this.setState({phone: e.target.value});
+    };
+
+    const verifyCodeChange = (e) => {
+      this.setState({code: e.target.value});
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      axios.post(`http://47.110.10.120:3000/users/sign_in_sms`, {
+        code: this.state.code,
+        phone_number: this.state.phone,
+      }).then(response => {
+        console.log(response.data);
+        Cookies.set("access_token", response.data.token);
+        Cookies.set("is_login", true);
+        Cookies.set("login_user.id", response.data.user.id);
+        Cookies.set("login_user.username", response.data.user.username);
+        Cookies.set("login_user.phone_number", response.data.user.phone_number);
+        // window.location.href = 'http://localhost:8000/';
+        window.location.href = 'http://47.110.10.120/';
+      }).catch(error => {
+        let error_data = error.response.data;
+        if (error_data.code === 'error.code_expire_invalid') {
+          alert('无效的验证码');
+        }
+      });
+    };
+
+    const applyVerifyCode = () => {
+      axios.post(`http://47.110.10.120:3000/users/verify_code`, { phone_number: this.state.phone })
+      .then(()=> {
+        let ti = setInterval(()=> {
+          let tick = this.state.count_down - 1;
+          console.log("tick:", tick);
+          if (tick === 0) {
+            this.setState({
+              verify_text: '获取验证码',
+              count_down: 60,
+            });
+            clearInterval(ti);
+          } else {
+            this.setState({
+              verify_text: tick + "秒",
+              count_down: tick,
+            });
+          }
+        }, 1000);
+      }).catch(error => {
+        alert("获取验证码失败");
+      });
+    };
+
     return (
       <section
         {...props}
@@ -61,39 +121,45 @@ class SignupForm extends React.Component {
             <div className="tiles-wrap">
               <div className="tiles-item">
                 <div className="tiles-item-inner">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <fieldset>
-                      <div className="mb-12">
+                      {/* <div className="mb-12">
                         <Input
                           label="Full name"
                           placeholder="Full name" 
                           labelHidden
                           required />
-                      </div>
+                      </div> */}
                       <div className="mb-12">
                         <Input
-                          type="email"
-                          label="Email"
-                          placeholder="Email"
+                          type="tel"
+                          label="手机号"
+                          onChange={phoneChange}
+                          placeholder="手机号"
                           labelHidden
                           required />
                       </div>
                       <div className="mb-12">
                         <Input
-                          type="password"
-                          label="Password"
-                          placeholder="Password"
+                          type="text"
+                          label="验证码"
+                          onChange={verifyCodeChange}
+                          placeholder="验证码"
                           labelHidden
-                          required />
+                          required >
+                          <Button tag="a" color="primary" onClick={applyVerifyCode}>
+                            {this.state.verify_text}
+                          </Button>
+                        </Input>
                       </div>
                       <div className="mt-24 mb-32">
-                        <Button color="primary" wide>Sign up</Button>
+                        <Button color="primary" wide>即刻开始</Button>
                       </div>
                     </fieldset>
                   </form>
                   <div className="signin-bottom has-top-divider">
                     <div className="pt-32 text-xs center-content text-color-low">
-                      Already have an account? <Link to="/login/" className="func-link">Login</Link>
+                      <Link to="/login/" className="func-link">账号密码登录</Link>
                     </div>
                   </div>
                 </div>
