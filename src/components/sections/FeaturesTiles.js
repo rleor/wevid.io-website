@@ -76,10 +76,10 @@ class FeaturesTiles extends React.Component {
                   </div>
                   <div className="features-tiles-item-content">
                     <h4 className="mt-0 mb-8">
-                      User friendly
+                      强大的云端素材管理
                     </h4>
                     <p className="m-0 text-sm">
-                      A pseudo-Latin text used in web design, layout, and printing in place of things to emphasise design.
+                      云端自动同步视频、脚本、图片、文件素材资源，自动转码，自动多格式存储，随时随地管理
                     </p>
                   </div>
                 </div>
@@ -98,10 +98,10 @@ class FeaturesTiles extends React.Component {
                   </div>
                   <div className="features-tiles-item-content">
                     <h4 className="mt-0 mb-8">
-                      User friendly
+                      极速访问、下载、上传
                     </h4>
                     <p className="m-0 text-sm">
-                      A pseudo-Latin text used in web design, layout, and printing in place of things to emphasise design.
+                      不限速下载，上传视频素材，所有资源触手可及
                     </p>
                   </div>
                 </div>
@@ -120,10 +120,10 @@ class FeaturesTiles extends React.Component {
                   </div>
                   <div className="features-tiles-item-content">
                     <h4 className="mt-0 mb-8">
-                      User friendly
+                      团队角色权限管理
                     </h4>
                     <p className="m-0 text-sm">
-                      A pseudo-Latin text used in web design, layout, and printing in place of things to emphasise design.
+                      管理不同团队参与者、外部协作者、客户关于资源、评论、审核、分享的权限
                     </p>
                   </div>
                 </div>
@@ -142,10 +142,10 @@ class FeaturesTiles extends React.Component {
                   </div>
                   <div className="features-tiles-item-content">
                     <h4 className="mt-0 mb-8">
-                      User friendly
+                      自动版本管理、对比
                     </h4>
                     <p className="m-0 text-sm">
-                      A pseudo-Latin text used in web design, layout, and printing in place of things to emphasise design.
+                      更好得管理文件版本，还可以轻易比较不同版本的区别和效果
                     </p>
                   </div>
                 </div>
@@ -164,10 +164,10 @@ class FeaturesTiles extends React.Component {
                   </div>
                   <div className="features-tiles-item-content">
                     <h4 className="mt-0 mb-8">
-                      User friendly
+                      分享更安全、更便捷
                     </h4>
                     <p className="m-0 text-sm">
-                      A pseudo-Latin text used in web design, layout, and printing in place of things to emphasise design.
+                      更多不同安全设定，如密码、过期时间、不同权限的分享，更丰富、更友好的社交平台分享
                     </p>
                   </div>
                 </div>
@@ -186,10 +186,10 @@ class FeaturesTiles extends React.Component {
                   </div>
                   <div className="features-tiles-item-content">
                     <h4 className="mt-0 mb-8">
-                      User friendly
+                      美观易用的移动端
                     </h4>
                     <p className="m-0 text-sm">
-                      A pseudo-Latin text used in web design, layout, and printing in place of things to emphasise design.
+                      设计美观的全平台客户端，电脑、手机、Pad等便携设备都有着友好一致的用户体验
                     </p>
                   </div>
                 </div>

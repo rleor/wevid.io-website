@@ -54,8 +54,8 @@ class FeaturesSplit extends React.Component {
     );
 
     const sectionHeader = {
-      title: 'The complex made simple',
-      paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore aliqua.'
+      title: '更迅捷、高效的团队沟通、反馈、审核',
+      paragraph: '视频创意的反馈更好的组织、收集、呈现给团队，剪辑师、制作人、客户、外部协作者都是最终成品的塑造者'
     };
 
     return (
@@ -71,10 +71,10 @@ class FeaturesSplit extends React.Component {
               <div className="split-item">
                 <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
                   <h3 className="mt-0 mb-12">
-                    Advanced features
+                    时间轴评论更精准
                   </h3>
                   <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident.
+                    评论更直观呈现在视频时间轴上，一键触达评论对应的视频画面或片段, 再也不用你来我往的反复截图确认
                   </p>
                 </div>
                 <div className={
@@ -101,10 +101,10 @@ class FeaturesSplit extends React.Component {
               <div className="split-item">
                 <div className="split-item-content center-content-mobile reveal-from-right" data-reveal-container=".split-item">
                   <h3 className="mt-0 mb-12">
-                    Advanced features
+                    涂鸦式标注更清晰
                   </h3>
                   <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident.
+                    没有什么比简单的涂画来表达具体所指更清晰更直接明白的了
                   </p>
                 </div>
                 <div className={
@@ -131,10 +131,10 @@ class FeaturesSplit extends React.Component {
               <div className="split-item">
                 <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
                   <h3 className="mt-0 mb-12">
-                    Advanced features
+                    反馈评论、审核更快捷
                   </h3>
                   <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident.
+                    共享的团队空间和便捷安全的分享机制，都让团队成员能及时收到反馈通知，审核效率成倍提升
                   </p>
                 </div>
                 <div className={
@@ -152,6 +152,35 @@ class FeaturesSplit extends React.Component {
                     <Image
                       src={require('./../../assets/images/features-split-top-03.png')}
                       alt="Features split top 03"
+                      width={622}
+                      height={510} />
+                  </div>
+                </div>
+              </div>
+              <div className="split-item">
+                <div className="split-item-content center-content-mobile reveal-from-right" data-reveal-container=".split-item">
+                  <h3 className="mt-0 mb-12">
+                    智能演示创意更酷炫
+                  </h3>
+                  <p className="m-0">
+                    最酷的创意就值得用更酷炫的方式来展示，让再小的团队都可以拥有自己的品牌风格呈现
+                  </p>
+                </div>
+                <div className={
+                  classNames(
+                    'split-item-image center-content-mobile illustration-element-04 reveal-from-left',
+                    imageFill && 'split-item-image-fill'
+                  )}
+                  data-reveal-container=".split-item">
+                  <Image
+                    src={require('./../../assets/images/features-split-image.svg')}
+                    alt="Features split 02"
+                    width={528}
+                    height={396} />
+                  <div style={imgStyle}>
+                    <Image
+                      src={require('./../../assets/images/features-split-top-02.png')}
+                      alt="Features split top 02"
                       width={622}
                       height={510} />
                   </div>
