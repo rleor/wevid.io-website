@@ -72,12 +72,17 @@ class SignupForm extends React.Component {
       }).then(response => {
         console.log(response.data);
         Cookies.set("access_token", response.data.token);
+        let user = response.data.user;
         Cookies.set("is_login", true);
-        Cookies.set("login_user.id", response.data.user.id);
-        Cookies.set("login_user.username", response.data.user.username);
-        Cookies.set("login_user.phone_number", response.data.user.phone_number);
-        // window.location.href = 'http://localhost:8000/';
-        window.location.href = 'http://47.110.10.120/';
+        Cookies.set("login_user.id", user.id);
+        Cookies.set("login_user.display_name", user.display_name);
+        Cookies.set("login_user.phone_number", user.phone_number);
+
+        if (user.display_name && user.owned_teams && user.owned_teams.length > 0) {
+          window.location.href = 'http://47.110.10.120/';
+        } else {
+          this.props.history.push('/initiate');
+        }
       }).catch(error => {
         let error_data = error.response.data;
         if (error_data.code === 'error.code_expire_invalid') {

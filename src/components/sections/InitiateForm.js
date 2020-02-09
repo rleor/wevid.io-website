@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import { SectionProps } from '../../utils/SectionProps';
-import { Link } from 'react-router-dom';
 import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
@@ -16,11 +15,11 @@ const defaultProps = {
   ...SectionProps.defaults
 }
 
-class LoginForm extends React.Component {
+class InitiateForm extends React.Component {
 
   state = {
-    phone: undefined,
-    password: undefined,
+    name: undefined,
+    teamName: undefined,
   };
 
   render() {
@@ -52,30 +51,28 @@ class LoginForm extends React.Component {
     );
 
     const sectionHeader = {
-      title: 'Welcome back. We exist to make entrepreneurship easier.',
+      title: '请输入昵称和团队名称',
     };
-    const phoneChange = (e) => {
-      this.setState({phone: e.target.value});
+    const nameChange = (e) => {
+      this.setState({name: e.target.value});
     };
-    const passwordChange = (e) => {
-      this.setState({password: e.target.value});
+    const teamNameChange = (e) => {
+      this.setState({teamName: e.target.value});
     };
     const handleSubmit = e => {
       e.preventDefault();
 
-      axios.post(`http://47.110.10.120:3000/users/sign_in`, {
-        login: this.state.phone,
-        password: this.state.password,
+      const access_token = Cookies.get('access_token');
+      axios.post(`http://47.110.10.120:3000/users/signup_initialize`, {
+        display_name: this.state.name,
+        team_name: this.state.teamName,
+      }, {
+        headers: {
+          Authorization: `Bearer ${access_token}`, 
+        }
       }).then(response=> {
         console.log(response.data);
-        Cookies.set("access_token", response.data.token);
-        Cookies.set("is_login", true);
-        Cookies.set("login_user.id", response.data.user.id);
-        Cookies.set("login_user.username", response.data.user.username);
-        Cookies.set("login_user.phone_number", response.data.user.phone_number);
-        // window.location.href = 'http://localhost:8000/';
         window.location.href = 'http://47.110.10.120/';
-
       }).catch(error=> {
         let error_data = error.response.data;
         if (error_data.code === 'error.invalid_username_password') {
@@ -98,24 +95,24 @@ class LoginForm extends React.Component {
                     <fieldset>
                       <div className="mb-12">
                         <Input
-                          type="tel"
-                          label="手机号"
-                          placeholder="手机号"
-                          onChange={phoneChange}
+                          type="text"
+                          label="昵称"
+                          placeholder="昵称"
+                          onChange={nameChange}
                           labelHidden
                           required />
                       </div>
                       <div className="mb-12">
                         <Input
-                          type="password"
-                          label="密码"
-                          placeholder="密码"
-                          onChange={passwordChange}
+                          type="text"
+                          label="团队名称"
+                          placeholder="团队名称"
+                          onChange={teamNameChange}
                           labelHidden
                           required />
                       </div>
                       <div className="mt-24 mb-32">
-                        <Button color="primary" wide>登录</Button>
+                        <Button color="primary" wide>完成创建</Button>
                       </div>
                       {/* <div className="signin-footer mb-32">
                         <Checkbox>Remember me</Checkbox>
@@ -123,11 +120,6 @@ class LoginForm extends React.Component {
                       </div> */}
                     </fieldset>
                   </form>
-                  <div className="signin-bottom has-top-divider">
-                    <div className="pt-32 text-xs center-content text-color-low">
-                      <Link to="/signup/" className="func-link">验证码登录</Link>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -138,7 +130,7 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.propTypes = propTypes;
-LoginForm.defaultProps = defaultProps;
+InitiateForm.propTypes = propTypes;
+InitiateForm.defaultProps = defaultProps;
 
-export default LoginForm;
+export default InitiateForm;
