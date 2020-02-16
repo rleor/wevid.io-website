@@ -75,8 +75,10 @@ class InitiateForm extends React.Component {
         window.location.href = 'http://47.110.10.120/';
       }).catch(error=> {
         let error_data = error.response.data;
-        if (error_data.code === 'error.invalid_username_password') {
-          alert('用户名或密码不正确');
+        if (error_data.code === 'error.team.duplicate_name') {
+          alert('团队名已存在，请更换团队名');
+        } else {
+          alert('对不起，出现内部错误');
         }
       });
     };
