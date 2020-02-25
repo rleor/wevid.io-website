@@ -24,7 +24,6 @@ class LoginForm extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     let inviter = getQueryString(this.props.location.search, 'inviter');
     let invite_code = getQueryString(this.props.location.search, 'invite_code');
 
@@ -149,7 +148,7 @@ class LoginForm extends React.Component {
                   </form>
                   <div className="signin-bottom has-top-divider">
                     <div className="pt-32 text-xs center-content text-color-low">
-                      <Link to="/signup/" className="func-link">验证码登录</Link>
+                      <Link to={`/signup${this.props.location.search}`} className="func-link">验证码登录</Link>
                     </div>
                   </div>
                 </div>
