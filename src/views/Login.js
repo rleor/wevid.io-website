@@ -4,7 +4,7 @@ import LoginForm from '../components/sections/LoginForm';
 class Login extends React.Component {
   render() {
     return (
-      <LoginForm className="illustration-section-01" />
+      <LoginForm className="illustration-section-01" {...this.props}/>
     );
   }
 }

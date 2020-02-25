@@ -5,7 +5,7 @@ import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import { getQueryString } from '../../utils/index';
 
 const propTypes = {
   ...SectionProps.types
@@ -23,6 +23,8 @@ class InitiateForm extends React.Component {
   };
 
   render() {
+    let inviter = getQueryString(this.props.location.search, 'inviter');
+    let invite_code = getQueryString(this.props.location.search, 'invite_code');
 
     const {
       className,
@@ -62,17 +64,31 @@ class InitiateForm extends React.Component {
     const handleSubmit = e => {
       e.preventDefault();
 
-      const access_token = Cookies.get('access_token');
-      axios.post(`http://47.110.10.120:3000/users/signup_initialize`, {
+      const access_token = localStorage.getItem('access_token');
+      let headers = { Authorization: `Bearer ${access_token}`, };
+      let payload = {
         display_name: this.state.name,
-        team_name: this.state.teamName,
-      }, {
-        headers: {
-          Authorization: `Bearer ${access_token}`, 
-        }
-      }).then(response=> {
+      };
+      if (invite_code === null || inviter === null) {
+        payload = {
+          ...payload,
+          team_name: this.state.teamName,
+        };
+      }
+      axios.post(`https://api.wevid.co/users/signup_initialize`, { ...payload }, { headers, })
+      .then(response=> {
         console.log(response.data);
-        window.location.href = 'http://47.110.10.120/';
+
+        axios.post(`https://api.wevid.co/teams/join`, {
+          invite_code: invite_code,
+          inviter_id: inviter,
+        }, { headers, }).then(response => {
+          console.log("join team response: ", response);
+          window.location.href = 'https://app.wevid.co/';
+        }).catch(error => {
+          console.log("join team error: ", error);
+          window.location.href = 'https://app.wevid.co/';
+        });
       }).catch(error=> {
         let error_data = error.response.data;
         if (error_data.code === 'error.team.duplicate_name') {
@@ -104,6 +120,7 @@ class InitiateForm extends React.Component {
                           labelHidden
                           required />
                       </div>
+                      {(inviter === null || invite_code == null) && 
                       <div className="mb-12">
                         <Input
                           type="text"
@@ -113,6 +130,7 @@ class InitiateForm extends React.Component {
                           labelHidden
                           required />
                       </div>
+                      }
                       <div className="mt-24 mb-32">
                         <Button color="primary" wide>完成创建</Button>
                       </div>

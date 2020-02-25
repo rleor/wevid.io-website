@@ -6,7 +6,7 @@ import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import { getQueryString } from '../../utils/index';
 
 const propTypes = {
   ...SectionProps.types
@@ -25,7 +25,8 @@ class SignupForm extends React.Component {
     code: undefined,
   };
   render() {
-
+    let inviter = getQueryString(this.props.location.search, 'inviter');
+    let invite_code = getQueryString(this.props.location.search, 'invite_code');
     const {
       className,
       topOuterDivider,
@@ -63,25 +64,48 @@ class SignupForm extends React.Component {
     const verifyCodeChange = (e) => {
       this.setState({code: e.target.value});
     };
+    
+    const join_team = (invite_code, inviter_id) => {
+      const access_token = localStorage.getItem('access_token');
+      axios.post(`https://api.wevid.co/teams/join`, {
+        invite_code: invite_code,
+        inviter_id: inviter_id,
+      }, {
+        headers: {
+          Authorization: `Bearer ${access_token}`, 
+        }
+      }).then(response => {
+        console.log("join team response: ", response);
+        window.location.href = 'https://app.wevid.co/';
+      }).catch(error => {
+        console.log("join team error: ", error);
+        // jump to page any way.
+        window.location.href = 'https://app.wevid.co/';
+      });
+    };
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      axios.post(`http://47.110.10.120:3000/users/sign_in_sms`, {
+      axios.post(`https://api.wevid.co/users/sign_in_sms`, {
         code: this.state.code,
         phone_number: this.state.phone,
       }).then(response => {
         console.log(response.data);
-        Cookies.set("access_token", response.data.token);
+        localStorage.setItem("access_token", response.data.token);
         let user = response.data.user;
-        Cookies.set("is_login", true);
-        Cookies.set("login_user.id", user.id);
-        Cookies.set("login_user.display_name", user.display_name);
-        Cookies.set("login_user.phone_number", user.phone_number);
+        localStorage.setItem("is_login", true);
+        localStorage.setItem("login_user.id", user.id);
+        localStorage.setItem("login_user.display_name", user.display_name);
+        localStorage.setItem("login_user.phone_number", user.phone_number);
 
-        if (user.display_name && user.owned_teams && user.owned_teams.length > 0) {
-          window.location.href = 'http://47.110.10.120/';
+        if (user.display_name/* && user.owned_teams && user.owned_teams.length > 0*/) {
+          if (invite_code !== null && inviter !== null) {
+            join_team(invite_code, inviter);
+          } else {
+            window.location.href = 'https://app.wevid.co/';
+          }
         } else {
-          this.props.history.push('/initiate');
+          this.props.history.push(`/initiate${this.props.location.search}`);
         }
       }).catch(error => {
         let error_data = error.response.data;
@@ -92,7 +116,7 @@ class SignupForm extends React.Component {
     };
 
     const applyVerifyCode = () => {
-      axios.post(`http://47.110.10.120:3000/users/verify_code`, { phone_number: this.state.phone })
+      axios.post(`https://api.wevid.co/users/verify_code`, { phone_number: this.state.phone })
       .then(()=> {
         let ti = setInterval(()=> {
           let tick = this.state.count_down - 1;
@@ -164,7 +188,7 @@ class SignupForm extends React.Component {
                   </form>
                   <div className="signin-bottom has-top-divider">
                     <div className="pt-32 text-xs center-content text-color-low">
-                      <Link to="/login/" className="func-link">账号密码登录</Link>
+                      <Link to={`/login${this.props.location.search}`} className="func-link">账号密码登录</Link>
                     </div>
                   </div>
                 </div>

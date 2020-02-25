@@ -6,7 +6,7 @@ import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import { getQueryString } from '../../utils/index';
 
 const propTypes = {
   ...SectionProps.types
@@ -24,6 +24,9 @@ class LoginForm extends React.Component {
   };
 
   render() {
+    console.log(this.props);
+    let inviter = getQueryString(this.props.location.search, 'inviter');
+    let invite_code = getQueryString(this.props.location.search, 'invite_code');
 
     const {
       className,
@@ -60,22 +63,43 @@ class LoginForm extends React.Component {
     const passwordChange = (e) => {
       this.setState({password: e.target.value});
     };
+    const join_team = (invite_code, inviter_id) => {
+      const access_token = localStorage.getItem('access_token');
+      axios.post(`https://api.wevid.co/teams/join`, {
+        invite_code: invite_code,
+        inviter_id: inviter_id,
+      }, {
+        headers: {
+          Authorization: `Bearer ${access_token}`, 
+        }
+      }).then(response => {
+        console.log("join team response: ", response);
+        window.location.href = 'https://app.wevid.co/';
+      }).catch(error => {
+        console.log("join team error: ", error);
+        // jump to page any way.
+        window.location.href = 'https://app.wevid.co/';
+      });
+    };
     const handleSubmit = e => {
       e.preventDefault();
 
-      axios.post(`http://47.110.10.120:3000/users/sign_in`, {
+      axios.post(`https://api.wevid.co/users/sign_in`, {
         login: this.state.phone,
         password: this.state.password,
       }).then(response=> {
         console.log(response.data);
-        Cookies.set("access_token", response.data.token);
-        Cookies.set("is_login", true);
-        Cookies.set("login_user.id", response.data.user.id);
-        Cookies.set("login_user.username", response.data.user.username);
-        Cookies.set("login_user.phone_number", response.data.user.phone_number);
-        // window.location.href = 'http://localhost:8000/';
-        window.location.href = 'http://47.110.10.120/';
-
+        localStorage.setItem("access_token", response.data.token);
+        localStorage.setItem("is_login", true);
+        localStorage.setItem("login_user.id", response.data.user.id);
+        localStorage.setItem("login_user.username", response.data.user.username);
+        localStorage.setItem("login_user.phone_number", response.data.user.phone_number);
+        if (invite_code !== null && inviter !== null) {
+            join_team(invite_code, inviter);
+        } else {
+          // window.location.href = 'http://localhost:8000/';
+          window.location.href = 'https://app.wevid.co/';
+        }
       }).catch(error=> {
         let error_data = error.response.data;
         if (error_data.code === 'error.invalid_username_password') {
