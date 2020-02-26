@@ -27,6 +27,8 @@ class SignupForm extends React.Component {
   render() {
     let inviter = getQueryString(this.props.location.search, 'inviter');
     let invite_code = getQueryString(this.props.location.search, 'invite_code');
+    let type = getQueryString(this.props.location.search, 'type');
+
     const {
       className,
       topOuterDivider,
@@ -65,20 +67,24 @@ class SignupForm extends React.Component {
       this.setState({code: e.target.value});
     };
     
-    const join_team = (invite_code, inviter_id) => {
+    const join = (invite_code, inviter_id) => {
       const access_token = localStorage.getItem('access_token');
-      axios.post(`https://api.wevid.co/teams/join`, {
-        invite_code: invite_code,
-        inviter_id: inviter_id,
-      }, {
-        headers: {
-          Authorization: `Bearer ${access_token}`, 
-        }
+      let url;
+      let req_body = { inviter_id };
+      if (type === 'team') {
+        url = `https://api.wevid.co/teams/join`;
+        req_body = { ...req_body, invite_code };
+      } else {
+        url = `https://api.wevid.co/projects/join`;
+        req_body = { ...req_body, share_code: invite_code};
+      }
+      axios.post(url, req_body, {
+        headers: { Authorization: `Bearer ${access_token}`, }
       }).then(response => {
-        console.log("join team response: ", response);
+        console.log(`join ${type} response: `, response);
         window.location.href = 'https://app.wevid.co/';
       }).catch(error => {
-        console.log("join team error: ", error);
+        console.log(`join ${type} error: `, error);
         // jump to page any way.
         window.location.href = 'https://app.wevid.co/';
       });
@@ -100,7 +106,7 @@ class SignupForm extends React.Component {
 
         if (user.display_name/* && user.owned_teams && user.owned_teams.length > 0*/) {
           if (invite_code !== null && inviter !== null) {
-            join_team(invite_code, inviter);
+            join(invite_code, inviter);
           } else {
             window.location.href = 'https://app.wevid.co/';
           }

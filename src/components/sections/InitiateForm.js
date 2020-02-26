@@ -23,8 +23,9 @@ class InitiateForm extends React.Component {
   };
 
   render() {
-    let inviter = getQueryString(this.props.location.search, 'inviter');
+    let inviter_id = getQueryString(this.props.location.search, 'inviter');
     let invite_code = getQueryString(this.props.location.search, 'invite_code');
+    let type = getQueryString(this.props.location.search, 'type');
 
     const {
       className,
@@ -69,7 +70,7 @@ class InitiateForm extends React.Component {
       let payload = {
         display_name: this.state.name,
       };
-      if (invite_code === null || inviter === null) {
+      if (invite_code === null || inviter_id === null) {
         payload = {
           ...payload,
           team_name: this.state.teamName,
@@ -78,15 +79,21 @@ class InitiateForm extends React.Component {
       axios.post(`https://api.wevid.co/users/signup_initialize`, { ...payload }, { headers, })
       .then(response=> {
         console.log(response.data);
+        let url;
+        let req_body = {inviter_id};
+        if (type === 'team') {
+          url = `https://api.wevid.co/teams/join`;
+          req_body = { ...req_body, invite_code, };
+        } else {
+          url = `https://api.wevid.co/projects/join`;
+          req_body = { ...req_body, share_code: invite_code, };
+        }
 
-        axios.post(`https://api.wevid.co/teams/join`, {
-          invite_code: invite_code,
-          inviter_id: inviter,
-        }, { headers, }).then(response => {
-          console.log("join team response: ", response);
+        axios.post(url, req_body, { headers, }).then(response => {
+          console.log(`join ${type} response: `, response);
           window.location.href = 'https://app.wevid.co/';
         }).catch(error => {
-          console.log("join team error: ", error);
+          console.log(`join ${type} error: `, error);
           window.location.href = 'https://app.wevid.co/';
         });
       }).catch(error=> {
@@ -120,7 +127,7 @@ class InitiateForm extends React.Component {
                           labelHidden
                           required />
                       </div>
-                      {(inviter === null || invite_code == null) && 
+                      {(inviter_id === null || invite_code == null) && 
                       <div className="mb-12">
                         <Input
                           type="text"
