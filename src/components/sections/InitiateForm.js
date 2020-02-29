@@ -53,9 +53,16 @@ class InitiateForm extends React.Component {
       bottomDivider && 'has-bottom-divider'
     );
 
-    const sectionHeader = {
-      title: '请输入昵称和团队名称',
-    };
+    let sectionHeader;
+    if ((inviter_id === null || invite_code == null)) {
+      sectionHeader = {
+        title: '请输入昵称和团队名称',
+      };
+    } else {
+      sectionHeader = {
+        title: '请输入昵称',
+      };
+    }
     const nameChange = (e) => {
       this.setState({name: e.target.value});
     };
