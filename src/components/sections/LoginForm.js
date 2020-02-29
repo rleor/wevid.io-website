@@ -6,7 +6,7 @@ import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 import axios from 'axios';
-import { getQueryString } from '../../utils/index';
+import { getQueryString, getStorage, setStorage } from '../../utils/index';
 
 const propTypes = {
   ...SectionProps.types
@@ -64,7 +64,7 @@ class LoginForm extends React.Component {
       this.setState({password: e.target.value});
     };
     const join = (invite_code, inviter_id) => {
-      const access_token = localStorage.getItem('access_token');
+      const access_token = getStorage('access_token');
       let url;
       let req_body = { inviter_id };
       if (type === 'team') {
@@ -93,11 +93,12 @@ class LoginForm extends React.Component {
         password: this.state.password,
       }).then(response=> {
         console.log(response.data);
-        localStorage.setItem("access_token", response.data.token);
-        localStorage.setItem("is_login", true);
-        localStorage.setItem("login_user.id", response.data.user.id);
-        localStorage.setItem("login_user.username", response.data.user.username);
-        localStorage.setItem("login_user.phone_number", response.data.user.phone_number);
+        document.domain = "wevid.co";
+        setStorage("access_token", response.data.token);
+        setStorage("is_login", true);
+        setStorage("login_user.id", response.data.user.id);
+        setStorage("login_user.username", response.data.user.username);
+        setStorage("login_user.phone_number", response.data.user.phone_number);
         if (invite_code !== null && inviter !== null) {
             join(invite_code, inviter);
         } else {

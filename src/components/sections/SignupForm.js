@@ -6,7 +6,7 @@ import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 import axios from 'axios';
-import { getQueryString } from '../../utils/index';
+import { getQueryString, getStorage, setStorage, removeStorage } from '../../utils/index';
 
 const propTypes = {
   ...SectionProps.types
@@ -68,7 +68,7 @@ class SignupForm extends React.Component {
     };
     
     const join = (invite_code, inviter_id) => {
-      const access_token = localStorage.getItem('access_token');
+      const access_token = getStorage('access_token');
       let url;
       let req_body = { inviter_id };
       if (type === 'team') {
@@ -97,12 +97,12 @@ class SignupForm extends React.Component {
         phone_number: this.state.phone,
       }).then(response => {
         console.log(response.data);
-        localStorage.setItem("access_token", response.data.token);
+        setStorage("access_token", response.data.token);
         let user = response.data.user;
-        localStorage.setItem("is_login", true);
-        localStorage.setItem("login_user.id", user.id);
-        localStorage.setItem("login_user.display_name", user.display_name);
-        localStorage.setItem("login_user.phone_number", user.phone_number);
+        setStorage("is_login", true);
+        setStorage("login_user.id", user.id);
+        setStorage("login_user.display_name", user.display_name);
+        setStorage("login_user.phone_number", user.phone_number);
 
         if (user.display_name/* && user.owned_teams && user.owned_teams.length > 0*/) {
           if (invite_code !== null && inviter !== null) {

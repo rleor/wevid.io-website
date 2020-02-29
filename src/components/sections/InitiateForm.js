@@ -5,7 +5,7 @@ import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 import axios from 'axios';
-import { getQueryString } from '../../utils/index';
+import { getQueryString, getStorage, setStorage } from '../../utils/index';
 
 const propTypes = {
   ...SectionProps.types
@@ -72,7 +72,7 @@ class InitiateForm extends React.Component {
     const handleSubmit = e => {
       e.preventDefault();
 
-      const access_token = localStorage.getItem('access_token');
+      const access_token = getStorage('access_token');
       let headers = { Authorization: `Bearer ${access_token}`, };
       let payload = {
         display_name: this.state.name,
