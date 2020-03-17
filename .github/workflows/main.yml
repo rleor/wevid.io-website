@@ -32,3 +32,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           source: "build/*"
           target: "/var/www/website"
+          rm: true
+          strip_components: 1
