@@ -129,7 +129,7 @@ class Header extends React.Component {
                         className="list-reset header-nav-right"
                       >
                         <li>
-                          <Link to="/signup/" className="button button-primary button-sm" onClick={this.closeMenu}>Sign up</Link>
+                          <Link to="/signup/" className="button button-primary button-sm" onClick={this.closeMenu}>注册</Link>
                         </li>
                       </ul>}
                   </div>

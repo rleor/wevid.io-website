@@ -31,6 +31,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           source: "build/*"
-          target: "/var/www/website"
+          target: "/var/www/wevid_website"
           rm: true
           strip_components: 1
