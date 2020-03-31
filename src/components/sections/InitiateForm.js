@@ -88,21 +88,25 @@ class InitiateForm extends React.Component {
         console.log(response.data);
         let url;
         let req_body = {inviter_id};
-        if (type === 'team') {
-          url = `https://api.wevid.co/teams/join`;
-          req_body = { ...req_body, invite_code, };
-        } else {
-          url = `https://api.wevid.co/projects/join`;
-          req_body = { ...req_body, share_code: invite_code, };
-        }
+        if (invite_code && inviter_id) {
+          if (type === 'team') {
+            url = `https://api.wevid.co/teams/join`;
+            req_body = { ...req_body, invite_code, };
+          } else {
+            url = `https://api.wevid.co/projects/join`;
+            req_body = { ...req_body, share_code: invite_code, };
+          }
 
-        axios.post(url, req_body, { headers, }).then(response => {
-          console.log(`join ${type} response: `, response);
+          axios.post(url, req_body, { headers, }).then(response => {
+            console.log(`join ${type} response: `, response);
+            window.location.href = 'https://app.wevid.co/';
+          }).catch(error => {
+            console.log(`join ${type} error: `, error);
+            window.location.href = 'https://app.wevid.co/';
+          });
+        } else {
           window.location.href = 'https://app.wevid.co/';
-        }).catch(error => {
-          console.log(`join ${type} error: `, error);
-          window.location.href = 'https://app.wevid.co/';
-        });
+        }
       }).catch(error=> {
         let error_data = error.response.data;
         if (error_data.code === 'error.team.duplicate_name') {
