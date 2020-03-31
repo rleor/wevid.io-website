@@ -29,7 +29,8 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.ssh_privatekey }}
+          passphrase: ${{ secrets.ssh_passphrase }}
           source: "build/*"
           target: "/var/www/wevid_website"
           rm: true
