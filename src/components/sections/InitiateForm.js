@@ -5,7 +5,7 @@ import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 import axios from 'axios';
-import { getQueryString, getStorage, setStorage } from '../../utils/index';
+import { getQueryString, getStorage } from '../../utils/index';
 
 const propTypes = {
   ...SectionProps.types
