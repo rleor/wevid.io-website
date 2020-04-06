@@ -6,7 +6,7 @@ import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 import axios from 'axios';
-import { getQueryString, getStorage, setStorage, removeStorage } from '../../utils/index';
+import { getQueryString, getStorage, setStorage } from '../../utils/index';
 
 const propTypes = {
   ...SectionProps.types
@@ -92,11 +92,19 @@ class SignupForm extends React.Component {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      axios.post(`https://api.wevid.co/users/sign_in_sms`, {
+      let payload = {
         code: this.state.code,
         phone_number: this.state.phone,
-      }).then(response => {
-        console.log(response.data);
+      };
+      if (invite_code !== null && inviter !== null) {
+        payload = {
+          ...payload,
+          is_invite: true,
+        };
+      }
+      axios.post(`https://api.wevid.co/users/sign_in_sms`, payload)
+      .then(response => {
+        console.log("sign in sms", response.data);
         setStorage("access_token", response.data.token);
         let user = response.data.user;
         setStorage("is_login", true);
@@ -104,14 +112,18 @@ class SignupForm extends React.Component {
         setStorage("login_user.display_name", user.display_name);
         setStorage("login_user.phone_number", user.phone_number);
 
-        if (user.display_name/* && user.owned_teams && user.owned_teams.length > 0*/) {
+        if (user.display_name && user.flag === 1/* && user.owned_teams && user.owned_teams.length > 0*/) {
           if (invite_code !== null && inviter !== null) {
             join(invite_code, inviter);
           } else {
             window.location.href = 'https://app.wevid.co/';
           }
         } else {
-          this.props.history.push(`/initiate${this.props.location.search}`);
+          if (this.props.location.search) {
+            this.props.history.push(`/initiate${this.props.location.search}&flag=${user.flag}`);
+          } else {
+            this.props.history.push(`/initiate?flag=${user.flag}`);
+          }
         }
       }).catch(error => {
         let error_data = error.response.data;

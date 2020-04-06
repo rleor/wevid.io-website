@@ -26,6 +26,7 @@ class InitiateForm extends React.Component {
     let inviter_id = getQueryString(this.props.location.search, 'inviter');
     let invite_code = getQueryString(this.props.location.search, 'invite_code');
     let type = getQueryString(this.props.location.search, 'type');
+    let flag = getQueryString(this.props.location.search, 'flag');
 
     const {
       className,
@@ -54,7 +55,7 @@ class InitiateForm extends React.Component {
     );
 
     let sectionHeader;
-    if ((inviter_id === null || invite_code == null)) {
+    if (parseInt(flag) === 0) {
       sectionHeader = {
         title: '请输入昵称和团队名称',
       };
@@ -77,12 +78,13 @@ class InitiateForm extends React.Component {
       let payload = {
         display_name: this.state.name,
       };
-      if (invite_code === null || inviter_id === null) {
+      if (parseInt(flag) === 0) {
         payload = {
           ...payload,
           team_name: this.state.teamName,
         };
       }
+      console.log("payload: ", payload);
       axios.post(`https://api.wevid.co/users/signup_initialize`, { ...payload }, { headers, })
       .then(response=> {
         console.log(response.data);
@@ -105,7 +107,7 @@ class InitiateForm extends React.Component {
             window.location.href = 'https://app.wevid.co/';
           });
         } else {
-          window.location.href = 'https://app.wevid.co/';
+          // window.location.href = 'https://app.wevid.co/';
         }
       }).catch(error=> {
         let error_data = error.response.data;
@@ -138,7 +140,7 @@ class InitiateForm extends React.Component {
                           labelHidden
                           required />
                       </div>
-                      {(inviter_id === null || invite_code == null) && 
+                      {parseInt(flag) === 0 && 
                       <div className="mb-12">
                         <Input
                           type="text"
