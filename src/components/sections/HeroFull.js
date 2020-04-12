@@ -50,11 +50,11 @@ class HeroFull extends React.Component {
           <div className={innerClasses}>
             <div className="hero-content">
               <h1 className="mt-0 mb-16 reveal-from-bottom" data-reveal-delay="200">
-                帮助视频团队更高效,创作更好的内容
+                让视频创意更出彩
               </h1>
               <div className="container-xs">
                 <p className="m-0 mb-32 reveal-from-bottom" data-reveal-delay="400">
-                  新时代视频创作者共享、协作、发布创意必备的智能云服务
+                  新时代视频创作者共享、协作、发布创意必备的智能云平台
                 </p>
                 <div className="reveal-from-bottom" data-reveal-delay="600">
                   <Button tag="a" color="primary" href="https://cruip.com/">
