@@ -121,7 +121,7 @@ class Header extends React.Component {
                         navPosition && `header-nav-${navPosition}`
                       )}>
                       <li>
-                        <Link to="/secondary/" onClick={this.closeMenu}>Secondary page</Link>
+                        <Link to="/secondary/" onClick={this.closeMenu}>APP下载</Link>
                       </li>
                     </ul>
                     {!hideSignin &&
@@ -129,7 +129,7 @@ class Header extends React.Component {
                         className="list-reset header-nav-right"
                       >
                         <li>
-                          <Link to="/signup/" className="button button-primary button-sm" onClick={this.closeMenu}>注册</Link>
+                          <Link to="/signup/" className="button button-primary button-sm" onClick={this.closeMenu}>快速登录</Link>
                         </li>
                       </ul>}
                   </div>
