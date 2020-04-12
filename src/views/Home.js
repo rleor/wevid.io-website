@@ -12,8 +12,8 @@ class Home extends React.Component {
         <HeroFull className="illustration-section-01" />
         <FeaturesTiles className="illustration-section-02" />
         <FeaturesSplit invertMobile topDivider imageFill />
-        <Pricing topDivider pricingSwitcher />
-        <Testimonial className="illustration-section-07" />
+        {/* <Pricing topDivider pricingSwitcher /> */}
+        {/* <Testimonial className="illustration-section-07" /> */}
       </React.Fragment>
     );
   }

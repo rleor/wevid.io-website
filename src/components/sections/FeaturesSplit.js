@@ -101,10 +101,10 @@ class FeaturesSplit extends React.Component {
               <div className="split-item">
                 <div className="split-item-content center-content-mobile reveal-from-right" data-reveal-container=".split-item">
                   <h3 className="mt-0 mb-12">
-                    涂鸦式标注更清晰
+                    反馈评论、审核更快捷
                   </h3>
                   <p className="m-0">
-                    没有什么比简单的涂画来表达具体所指更清晰更直接明白的了
+                    共享的团队空间和便捷安全的分享机制，都让团队成员能及时收到反馈通知，审核效率成倍提升
                   </p>
                 </div>
                 <div className={
@@ -131,10 +131,10 @@ class FeaturesSplit extends React.Component {
               <div className="split-item">
                 <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
                   <h3 className="mt-0 mb-12">
-                    反馈评论、审核更快捷
+                    智能演示创意更酷炫
                   </h3>
                   <p className="m-0">
-                    共享的团队空间和便捷安全的分享机制，都让团队成员能及时收到反馈通知，审核效率成倍提升
+                    最酷的创意就值得用更酷炫的方式来展示，让再小的团队都可以拥有自己的品牌风格呈现
                   </p>
                 </div>
                 <div className={
@@ -157,36 +157,6 @@ class FeaturesSplit extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="split-item">
-                <div className="split-item-content center-content-mobile reveal-from-right" data-reveal-container=".split-item">
-                  <h3 className="mt-0 mb-12">
-                    智能演示创意更酷炫
-                  </h3>
-                  <p className="m-0">
-                    最酷的创意就值得用更酷炫的方式来展示，让再小的团队都可以拥有自己的品牌风格呈现
-                  </p>
-                </div>
-                <div className={
-                  classNames(
-                    'split-item-image center-content-mobile illustration-element-04 reveal-from-left',
-                    imageFill && 'split-item-image-fill'
-                  )}
-                  data-reveal-container=".split-item">
-                  <Image
-                    src={require('./../../assets/images/features-split-image.svg')}
-                    alt="Features split 02"
-                    width={528}
-                    height={396} />
-                  <div style={imgStyle}>
-                    <Image
-                      src={require('./../../assets/images/features-split-top-02.png')}
-                      alt="Features split top 02"
-                      width={622}
-                      height={510} />
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>

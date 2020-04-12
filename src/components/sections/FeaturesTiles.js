@@ -66,20 +66,20 @@ class FeaturesTiles extends React.Component {
               <div className="tiles-item reveal-scale-up">
                 <div className="tiles-item-inner">
                   <div className="features-tiles-item-header">
-                    <div className="features-tiles-item-image mb-16">
+                    {/* <div className="features-tiles-item-image mb-16"> */}
                       <Image
-                        src={require('./../../assets/images/feature-tile-icon-01.svg')}
+                        src={require('./../../assets/images/feature-tile-icon-01.png')}
                         alt="Features tile icon 01"
-                        width={80}
-                        height={80} />
-                    </div>
+                        width={160}
+                        height={160} />
+                    {/* </div> */}
                   </div>
                   <div className="features-tiles-item-content">
                     <h4 className="mt-0 mb-8">
-                      强大的云端素材管理
+                      万能网盘
                     </h4>
                     <p className="m-0 text-sm">
-                      云端自动同步视频、脚本、图片、文件素材资源，自动转码，自动多格式存储，随时随地管理
+                      云端管理素材资源,智能分类、备份
                     </p>
                   </div>
                 </div>
@@ -88,17 +88,17 @@ class FeaturesTiles extends React.Component {
               <div className="tiles-item reveal-scale-up" data-reveal-delay="200">
                 <div className="tiles-item-inner">
                   <div className="features-tiles-item-header">
-                    <div className="features-tiles-item-image mb-16">
+                    {/* <div className="features-tiles-item-image mb-16"> */}
                       <Image
-                        src={require('./../../assets/images/feature-tile-icon-02.svg')}
+                        src={require('./../../assets/images/feature-tile-icon-02.png')}
                         alt="Features tile icon 02"
-                        width={80}
-                        height={80} />
-                    </div>
+                        width={160}
+                        height={160} />
+                    {/* </div> */}
                   </div>
                   <div className="features-tiles-item-content">
                     <h4 className="mt-0 mb-8">
-                      极速访问、下载、上传
+                      不限速访问
                     </h4>
                     <p className="m-0 text-sm">
                       不限速下载，上传视频素材，所有资源触手可及
@@ -110,13 +110,13 @@ class FeaturesTiles extends React.Component {
               <div className="tiles-item reveal-scale-up" data-reveal-delay="400">
                 <div className="tiles-item-inner">
                   <div className="features-tiles-item-header">
-                    <div className="features-tiles-item-image mb-16">
+                    {/* <div className="features-tiles-item-image mb-16"> */}
                       <Image
-                        src={require('./../../assets/images/feature-tile-icon-03.svg')}
+                        src={require('./../../assets/images/feature-tile-icon-03.png')}
                         alt="Features tile icon 03"
-                        width={80}
-                        height={80} />
-                    </div>
+                        width={160}
+                        height={160} />
+                    {/* </div> */}
                   </div>
                   <div className="features-tiles-item-content">
                     <h4 className="mt-0 mb-8">
@@ -132,69 +132,24 @@ class FeaturesTiles extends React.Component {
               <div className="tiles-item reveal-scale-up">
                 <div className="tiles-item-inner">
                   <div className="features-tiles-item-header">
-                    <div className="features-tiles-item-image mb-16">
+                    {/* <div className="features-tiles-item-image mb-16"> */}
                       <Image
-                        src={require('./../../assets/images/feature-tile-icon-04.svg')}
+                        src={require('./../../assets/images/feature-tile-icon-04.png')}
                         alt="Features tile icon 04"
-                        width={80}
-                        height={80} />
-                    </div>
+                        width={160}
+                        height={160} />
+                    {/* </div> */}
                   </div>
                   <div className="features-tiles-item-content">
                     <h4 className="mt-0 mb-8">
-                      自动版本管理、对比
+                      全平台客户端
                     </h4>
                     <p className="m-0 text-sm">
-                      更好得管理文件版本，还可以轻易比较不同版本的区别和效果
+                      电脑、手机、iPad都有着友好一致的用户体验
                     </p>
                   </div>
                 </div>
               </div>
-
-              <div className="tiles-item reveal-scale-up" data-reveal-delay="200">
-                <div className="tiles-item-inner">
-                  <div className="features-tiles-item-header">
-                    <div className="features-tiles-item-image mb-16">
-                      <Image
-                        src={require('./../../assets/images/feature-tile-icon-05.svg')}
-                        alt="Features tile icon 05"
-                        width={80}
-                        height={80} />
-                    </div>
-                  </div>
-                  <div className="features-tiles-item-content">
-                    <h4 className="mt-0 mb-8">
-                      分享更安全、更便捷
-                    </h4>
-                    <p className="m-0 text-sm">
-                      更多不同安全设定，如密码、过期时间、不同权限的分享，更丰富、更友好的社交平台分享
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="tiles-item reveal-scale-up" data-reveal-delay="400">
-                <div className="tiles-item-inner">
-                  <div className="features-tiles-item-header">
-                    <div className="features-tiles-item-image mb-16">
-                      <Image
-                        src={require('./../../assets/images/feature-tile-icon-06.svg')}
-                        alt="Features tile icon 06"
-                        width={80}
-                        height={80} />
-                    </div>
-                  </div>
-                  <div className="features-tiles-item-content">
-                    <h4 className="mt-0 mb-8">
-                      美观易用的移动端
-                    </h4>
-                    <p className="m-0 text-sm">
-                      设计美观的全平台客户端，电脑、手机、Pad等便携设备都有着友好一致的用户体验
-                    </p>
-                  </div>
-                </div>
-              </div>              
-
             </div>
           </div>
         </div>
