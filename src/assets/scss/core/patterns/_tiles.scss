@@ -78,3 +78,9 @@
 		}
 	}
 }
+
+@include media( '<=medium' ) {
+    .tiles-wrap{
+        flex-wrap: wrap;
+    }
+}
