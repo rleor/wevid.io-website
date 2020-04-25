@@ -29,7 +29,15 @@
 
 	.header-nav-inner {
 		display: flex;
-		flex-grow: 1;
+    flex-grow: 1;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+    img:hover {
+      width: 200px;
+      height: 200px;
+    }
 	}
 
     ul {

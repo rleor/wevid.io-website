@@ -125,8 +125,7 @@ class Header extends React.Component {
                         <Image
                           src={require('./../../assets/images/qrcode.png')}
                           alt="QR Code"
-                          width={20}
-                          height={20} />
+                        />
                         <Link to="/secondary/" onClick={this.closeMenu}>APP下载</Link>
                       </li>
                     </ul>
