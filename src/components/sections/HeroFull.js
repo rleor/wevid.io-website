@@ -57,7 +57,7 @@ class HeroFull extends React.Component {
                   新时代视频创作者共享、协作、发布创意必备的智能云平台
                 </p>
                 <div className="reveal-from-bottom" data-reveal-delay="600">
-                  <Button tag="a" color="primary" href="https://cruip.com/">
+                  <Button tag="a" color="primary" href="/signup/">
                     免费使用
                   </Button>
                 </div>

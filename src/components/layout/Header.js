@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import Logo from './partials/Logo';
+import Image from '../elements/Image';
 
 const propTypes = {
   active: PropTypes.bool,
@@ -121,6 +122,11 @@ class Header extends React.Component {
                         navPosition && `header-nav-${navPosition}`
                       )}>
                       <li>
+                        <Image
+                          src={require('./../../assets/images/qrcode.png')}
+                          alt="QR Code"
+                          width={20}
+                          height={20} />
                         <Link to="/secondary/" onClick={this.closeMenu}>APP下载</Link>
                       </li>
                     </ul>
