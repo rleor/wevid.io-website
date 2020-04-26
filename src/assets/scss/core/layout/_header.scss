@@ -32,9 +32,11 @@
     flex-grow: 1;
     img {
       width: 20px;
-      height: 20px;
+	  height: 20px;
+	  cursor: pointer;
     }
     img:hover {
+	  position: absolute;
       width: 200px;
       height: 200px;
     }
@@ -53,7 +55,7 @@
     }
 
     li {
-
+		display: flex;
 		+ .header-button {
 			margin-left: $header-nav--padding-h;
 		}
