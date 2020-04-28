@@ -25,6 +25,7 @@ const Logo = ({
             alt="Storm"
             width={32}
             height={32} />
+            Wevid
         </Link>
       </h1>
     </div>
