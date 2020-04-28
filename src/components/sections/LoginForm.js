@@ -55,7 +55,7 @@ class LoginForm extends React.Component {
     );
 
     const sectionHeader = {
-      title: 'Welcome back. We exist to make entrepreneurship easier.',
+      title: 'Wevid - 让视频创意更出彩',
     };
     const phoneChange = (e) => {
       this.setState({phone: e.target.value});

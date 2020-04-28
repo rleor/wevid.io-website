@@ -56,7 +56,7 @@ class SignupForm extends React.Component {
     );
 
     const sectionHeader = {
-      title: 'Welcome. We exist to make entrepreneurship easier.',
+      title: 'Wevid - 让视频创意更出彩',
     };
 
     const phoneChange = (e) => {

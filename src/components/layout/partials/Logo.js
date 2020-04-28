@@ -22,10 +22,10 @@ const Logo = ({
         <Link to="/">
           <Image
             src={require('./../../../assets/images/logo.png')}
-            alt="Storm"
+            alt="Wevid Logo"
             width={32}
             height={32} />
-            Wevid
+          <span>Wevid</span>
         </Link>
       </h1>
     </div>
