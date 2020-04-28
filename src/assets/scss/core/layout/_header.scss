@@ -43,8 +43,10 @@
     img {
       width: 20px;
       height: 20px;
+      cursor: pointer;
     }
     img:hover {
+      position: absolute;
       width: 200px;
       height: 200px;
     }
@@ -57,14 +59,11 @@
     white-space: nowrap;
     margin-bottom: 0;
 
-    &:first-of-type {
-      flex-wrap: wrap;
-    }
-  }
-
-  li {
-    + .header-button {
-      margin-left: $header-nav--padding-h;
+    li {
+      display: flex;
+      + .header-button {
+        margin-left: $header-nav--padding-h;
+      }
     }
   }
 
