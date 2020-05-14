@@ -15,6 +15,8 @@ import Login from './views/Login';
 import Signup from './views/Signup';
 import Initiate from './views/Initiate';
 
+import Download from './views/Download';
+
 class App extends React.Component {
 
   componentDidMount() {
@@ -38,6 +40,7 @@ class App extends React.Component {
             <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
             <AppRoute exact path="/secondary" component={Secondary} layout={LayoutAlternative} />
             <AppRoute exact path="/login" component={Login} layout={LayoutSignin} />
+            <AppRoute exact path="/download" component={Download} />
             <AppRoute exact path="/signup" component={Signup} layout={LayoutSignin} />
             <AppRoute exact path="/initiate" component={Initiate} layout={LayoutSignin} />
           </Switch>

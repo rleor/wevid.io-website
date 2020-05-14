@@ -122,11 +122,13 @@ class Header extends React.Component {
                         navPosition && `header-nav-${navPosition}`
                       )}>
                       <li>
-                        <Image
-                          src={require('./../../assets/images/qrcode.png')}
-                          alt="QR Code"
-                        />
-                        <Link onClick={this.closeMenu}>APP下载</Link>
+                        <Link to="/download/" >
+                          <Image
+                            src={require('./../../assets/images/icon_qrcode.png')}
+                            alt="QR Code"
+                          />
+                          APP下载
+                        </Link>
                       </li>
                     </ul>
                     {!hideSignin &&

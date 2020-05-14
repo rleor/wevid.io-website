@@ -44,11 +44,9 @@
       width: 20px;
       height: 20px;
       cursor: pointer;
-    }
-    img:hover {
-      position: absolute;
-      width: 200px;
-      height: 200px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 5px;
     }
   }
 
